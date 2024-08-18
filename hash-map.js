@@ -1,4 +1,4 @@
-import { hash, HashStructure } from './hash-structure.js';
+import { hash, HashStructure, traverseLinkedList } from './hash-structure.js';
 
 export class HashMap extends HashStructure {
   constructor(bucketsLength = 16, loadFactor = 0.75) {
@@ -76,10 +76,10 @@ export class HashMap extends HashStructure {
 
       let linkedItem = item.next;
 
-      while (linkedItem !== null) {
+      traverseLinkedList(linkedItem, () => {
         items.push(linkedItem.key);
         linkedItem = linkedItem.next;
-      }
+      });
     });
 
     return items;
@@ -95,10 +95,10 @@ export class HashMap extends HashStructure {
 
       let linkedItem = item.next;
 
-      while (linkedItem !== null) {
+      traverseLinkedList(linkedItem, () => {
         items.push(linkedItem.value);
         linkedItem = linkedItem.next;
-      }
+      });
     });
 
     return items;
@@ -114,10 +114,10 @@ export class HashMap extends HashStructure {
 
       let linkedItem = item.next;
 
-      while (linkedItem !== null) {
+      traverseLinkedList(linkedItem, () => {
         items.push({ key: linkedItem.key, value: linkedItem.value });
         linkedItem = linkedItem.next;
-      }
+      });
     });
 
     return items;

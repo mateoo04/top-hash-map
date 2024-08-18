@@ -10,6 +10,14 @@ export function hash(key, bucketsLength) {
   return hashCode;
 }
 
+export function traverseLinkedList(startNode, callback) {
+  let currentNode = startNode;
+  while (currentNode !== null) {
+    callback(currentNode);
+    currentNode = currentNode.next;
+  }
+}
+
 export class HashStructure {
   constructor(bucketsLength = 16, loadFactor = 0.75) {
     this.buckets = [];
@@ -60,10 +68,10 @@ export class HashStructure {
 
       let linkedItem = item.next;
 
-      while (linkedItem !== null) {
+      traverseLinkedList(linkedItem, () => {
         length++;
         linkedItem = linkedItem.next;
-      }
+      });
     });
 
     return length;

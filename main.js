@@ -22,7 +22,7 @@ test.set('carrot', 'orangey');
 test.set('moon', 'silver');
 
 console.log('Length: ', test.length());
-console.log('All entries: ', test.keys());
+console.log('All entries: ', test.entries());
 console.log(test.bucketsLength);
 
 const setTest = new HashSet();

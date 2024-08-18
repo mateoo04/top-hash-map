@@ -1,4 +1,4 @@
-import { hash, HashStructure } from './hash-structure.js';
+import { hash, HashStructure, traverseLinkedList } from './hash-structure.js';
 
 export class HashSet extends HashStructure {
   constructor(bucketsLength = 16, loadFactor = 0.75) {
@@ -12,7 +12,6 @@ export class HashSet extends HashStructure {
 
     this.clear();
 
-    //replace forEach with map
     items.forEach((item) => {
       this.set(item);
     });
@@ -53,10 +52,10 @@ export class HashSet extends HashStructure {
 
       let linkedItem = item.next;
 
-      while (linkedItem !== null) {
+      traverseLinkedList(linkedItem, () => {
         items.push(linkedItem.key);
         linkedItem = linkedItem.next;
-      }
+      });
     });
 
     return items;
