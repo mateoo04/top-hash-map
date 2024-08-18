@@ -6,11 +6,9 @@ export class HashSet extends HashStructure {
   }
 
   #growBuckets() {
-    this.bucketsLength = this.bucketsLength * 2;
-
     const items = this.entries();
 
-    this.clear();
+    this.buckets = new Array(this.buckets.length * 2);
 
     items.forEach((item) => {
       this.set(item);
@@ -20,7 +18,7 @@ export class HashSet extends HashStructure {
   set(key) {
     if (this.has(key)) return;
 
-    const index = hash(key, this.bucketsLength);
+    const index = hash(key, this.buckets.length);
 
     if (this.buckets[index] === undefined || this.buckets[index] === null) {
       this.buckets[index] = { key: key, next: null };
@@ -37,7 +35,7 @@ export class HashSet extends HashStructure {
       };
     }
 
-    if (this.length() / this.bucketsLength > 0.75) {
+    if (this.length() / this.buckets.length > 0.75) {
       this.#growBuckets();
     }
   }

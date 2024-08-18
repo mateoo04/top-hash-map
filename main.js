@@ -23,7 +23,6 @@ test.set('moon', 'silver');
 
 console.log('Length: ', test.length());
 console.log('All entries: ', test.entries());
-console.log(test.bucketsLength);
 
 const setTest = new HashSet();
 
@@ -48,4 +47,3 @@ setTest.remove('venus');
 
 console.log('Length of set: ', setTest.length());
 console.log('All entries: ', setTest.entries());
-console.log(setTest.bucketsLength);

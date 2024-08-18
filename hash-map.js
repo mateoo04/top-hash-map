@@ -6,11 +6,9 @@ export class HashMap extends HashStructure {
   }
 
   #growBuckets() {
-    this.bucketsLength = this.bucketsLength * 2;
-
     const items = this.entries();
 
-    this.clear();
+    this.buckets = new Array(this.buckets.length * 2);
 
     items.forEach((item) => {
       this.set(item.key, item.value);
@@ -18,7 +16,7 @@ export class HashMap extends HashStructure {
   }
 
   set(key, value) {
-    const index = hash(key, this.bucketsLength);
+    const index = hash(key, this.buckets.length);
 
     //when the bucket is empty or the fist item in it is to be modified
     if (this.buckets[index] === undefined || this.buckets[index].key === key) {
@@ -46,14 +44,14 @@ export class HashMap extends HashStructure {
         next: null,
       };
 
-      if (this.length() / this.bucketsLength > 0.75) {
+      if (this.length() / this.buckets.length > 0.75) {
         this.#growBuckets();
       }
     }
   }
 
   get(key) {
-    const hashCode = hash(key, this.bucketsLength);
+    const hashCode = hash(key, this.buckets.length);
     if (this.buckets[hashCode] === undefined || this.buckets[hashCode] === null)
       return null;
 

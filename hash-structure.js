@@ -20,13 +20,12 @@ export function traverseLinkedList(startNode, callback) {
 
 export class HashStructure {
   constructor(bucketsLength = 16, loadFactor = 0.75) {
-    this.buckets = [];
-    this.bucketsLength = bucketsLength;
+    this.buckets = new Array(bucketsLength);
   }
 
   //NOTE: You cannot set the object to null, but you can set its properties' values to null
   remove(key) {
-    const hashCode = hash(key, this.bucketsLength);
+    const hashCode = hash(key, this.buckets.length);
 
     if (this.buckets[hashCode] === undefined || this.buckets[hashCode] === null)
       return false;
@@ -78,7 +77,7 @@ export class HashStructure {
   }
 
   has(key) {
-    let object = this.buckets[hash(key, this.bucketsLength)];
+    let object = this.buckets[hash(key, this.buckets.length)];
 
     if (object === undefined) return false;
 
